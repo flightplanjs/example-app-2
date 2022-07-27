@@ -4,6 +4,9 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const autoprefixer = require('autoprefixer');
+const tailwind = require('tailwindcss');
+
 const isTest = process.env.EMBER_CLI_TEST_COMMAND;
 const isProd = process.env.EMBER_ENV === 'production';
 
@@ -65,6 +68,24 @@ module.exports = function (defaults) {
       includeExternalHelpers: true,
     },
     'ember-cli-terser': terserSettings,
+    postcssOptions: {
+      compile: {
+        // track changes in template, css, scss, and tailwind config files
+        cacheInclude: [/.*\.(css|scss|hbs)$/, /.tailwind\/config\.js$/],
+        plugins: [
+          {
+            module: autoprefixer,
+            options: {},
+          },
+          {
+            module: tailwind,
+            options: {
+              config: './app/styles/tailwind/config.js',
+            },
+          },
+        ],
+      },
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -96,16 +117,18 @@ module.exports = function (defaults) {
     packagerOptions: {
       // publicAssetURL: EmberApp.env() === 'production' ? 'https://your-cdn-here.com/' : '/', // This should be a URL ending in "/"
       webpackConfig: {
-        plugins: [new BundleAnalyzerPlugin({
-          generateStatsFile: true,
-          openAnalyzer: false,
-          statsFilename: path.join(
-            process.cwd(),
-            'concat-stats-for',
-            'asset-stats.json',
-          ),
-        })]
-      }
+        plugins: [
+          new BundleAnalyzerPlugin({
+            generateStatsFile: true,
+            openAnalyzer: false,
+            statsFilename: path.join(
+              process.cwd(),
+              'concat-stats-for',
+              'asset-stats.json'
+            ),
+          }),
+        ],
+      },
     },
   });
 };
