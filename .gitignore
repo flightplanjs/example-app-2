@@ -44,6 +44,7 @@ yarn-error.log
 /addons/*/tmp/
 /addons/*/node_modules/
 /apps/*/concat-stats-for/
+/apps/*/public/assets/tailwind.css
 /engines/*/concat-stats-for/
 /addons/*/concat-stats-for/
 
