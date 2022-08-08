@@ -34,6 +34,7 @@
     "@glimmer/tracking": "^1.1.2",
     "autoprefixer": "^10.4.7",
     "broccoli-asset-rev": "^3.0.0",
+    "concurrently": "^7.3.0",
     "ember-auto-import": "^2.4.1",
     "ember-cached-decorator-polyfill": "^0.1.4",
     "ember-cli": "^4.3.0",
@@ -43,7 +44,6 @@
     "ember-cli-fastboot": "^3.3.0",
     "ember-cli-htmlbars": "^6.0.1",
     "ember-cli-inject-live-reload": "^2.1.0",
-    "ember-cli-postcss": "^8.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-cli-typescript": "^5.1.0",
@@ -69,8 +69,10 @@
     "webpack-bundle-analyzer": "^4.5.0"
   },
   "scripts": {
+    "tailwind:watch": "tailwindcss -i ./tailwind-input.css -o ./public/assets/tailwind.css --watch",
+    "ember:serve": "EXPERIMENTAL_RENDER_MODE_SERIALIZE=true EMBER_ENGINES_ADDON_DEDUPE=true && ember serve --port=0",
+    "start": "concurrently \"pnpm tailwind:watch\" \"pnpm ember:serve\"",
     "build": "EXPERIMENTAL_RENDER_MODE_SERIALIZE=true EMBROIDER_CONCAT_STATS=true EMBER_ENGINES_ADDON_DEDUPE=true && ember build --environment=production",
-    "start": "EXPERIMENTAL_RENDER_MODE_SERIALIZE=true EMBER_ENGINES_ADDON_DEDUPE=true && ember serve --port=0",
     "test:development": "ember exam --parallel=16 --load-balance --test-port=0",
     "test:production": "ember exam --parallel=16 --load-balance -e production --test-port=0"
   },

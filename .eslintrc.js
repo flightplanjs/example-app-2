@@ -370,6 +370,7 @@ module.exports = {
     // node files
     {
       files: [
+        'apps/*/app/styles/**/*.js',
         'bin/**/*.js',
         'addons/*/addon-main.js',
         '.eslintrc.js',
