@@ -23,7 +23,9 @@
     "lint:hbs": "ember-template-lint .",
     "lint:jsts": "eslint . --cache",
     "check:types": "tsc -p ./tsconfig.json --noEmit --pretty false",
-    "start:my-ui": "cd apps/my-ui && pnpm run start"
+    "start:my-ui": "cd apps/my-ui && pnpm run start",
+    "start:my-api": "cd apps/my-api && pnpm run start:dev",
+    "start:dev": "concurrently \"pnpm start:my-ui\" \"pnpm start:my-api\""
   },
   "repository": {
     "type": "git",
@@ -78,6 +80,7 @@
     "@types/rsvp": "^4.0.4",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
+    "concurrently": "^7.3.0",
     "ember-cli-htmlbars": "^6.0.1",
     "ember-modifier": "^3.2.7",
     "ember-template-lint": "^4.10.1",

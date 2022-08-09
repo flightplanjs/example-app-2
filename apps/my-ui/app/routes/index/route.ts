@@ -5,7 +5,7 @@ import { service } from '@ember/service';
 export default class LoginRoute extends Route {
   @service() declare router: RouterService;
 
-  beforeModel() {
-    return this.router.transitionTo('login');
-  }
+  // beforeModel() {
+  //   return this.router.transitionTo('login');
+  // }
 }
